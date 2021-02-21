@@ -70,6 +70,10 @@ button {
   margin: 2vw 3vw;
 }
 
+/* button:focus {
+  outline: 0;
+} */
+
 #buttons-row-1 {
   display: flex;
   justify-content: flex-end;
