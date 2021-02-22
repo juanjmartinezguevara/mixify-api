@@ -24,10 +24,11 @@ body, html {
   justify-content: space-between;
   align-items: center;
   padding: 1vw 2vw;
+  box-shadow: 0 0.3vw 0.3vw rgba(12, 12, 12, 0.3);
 }
 
 #img-logo {
-  width: 10vw;
+  width: 8vw;
 }
 
 #nav-links a {
@@ -36,6 +37,10 @@ body, html {
   font-weight: bold;
   text-decoration: none;
   padding: 0 2vw;
+}
+
+#nav-links a:hover {
+  color: white;
 }
 
 h1, h2, h3 {
@@ -54,6 +59,12 @@ p {
   margin: auto;
 }
 
+.home-header p {
+  margin: 2vw auto;
+  width: 70vw;
+  text-align: center;
+}
+
 .home-row {
   width: 80vw;
   margin: auto;
@@ -62,7 +73,7 @@ p {
 }
 
 .img-prototype {
-  width: 30vw;
+  width: 25vw;
   margin: 2vw auto;
 }
 
