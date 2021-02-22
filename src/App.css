@@ -7,6 +7,11 @@ body, html {
   color: white;
 }
 
+.margin {
+  width: 95vw;
+  margin: 3vw auto 1vw;
+}
+
 #homepage {
   display: flex;
   flex-direction: column;
@@ -22,7 +27,7 @@ body, html {
 }
 
 #img-logo {
-  width: 5vw;
+  width: 10vw;
 }
 
 #nav-links a {
@@ -33,19 +38,20 @@ body, html {
   padding: 0 2vw;
 }
 
-h1 {
+h1, h2, h3 {
   margin: 2vw auto;
   text-align: center;
 }
 
 p {
   font-size: 1.5vw;
+  line-height: 2vw;
   margin: 2vw auto;
 }
 
 .home-header {
   width: 80vw;
-  margin: 1vw auto;
+  margin: auto;
 }
 
 .home-row {
@@ -78,23 +84,50 @@ button {
   margin: 1vw;
 }
 
+button:hover {
+  background: linear-gradient(45deg, rgba(30, 215, 96, 0.8) 30%, rgba(30, 215, 96, 1) 100%);
+  color: white;
+}
+
+.buttons-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .buttons-row {
   width: 80vw;
-  margin: auto;
+  margin: 1vw auto;
   display: flex;
   justify-content: center;
 }
 
-.multiple-choice div {
+.playlist-panel {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .music-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  max-width: 25vw;
+  padding: 1vw;
+  margin: 1vw;
+}
+
+.music-tile h3 {
+  text-align: center;
+  width: 20vw;
+  margin: 2vw 0;
 }
 
 .music-tile img {
-  width: 25vw;
+  width: 20vw;
+}
+
+.music-tile audio {
+  width: 20vw;
 }
