@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import token from "./Token";
 
 function Playlist(props) {
@@ -9,6 +9,7 @@ function Playlist(props) {
   let [playlists, setPlaylists] = useState([]);
   let [tracks, setTracks] = useState([]);
   let [allTracks, setAllTracks] = useState([]);
+  let [randomPlaylist, setRandomPlaylist] = useState([])
 
   useEffect(() => {
     getCategories();
@@ -43,7 +44,10 @@ function Playlist(props) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(`Fetching the ${category_id.toUpperCase()} category playlists...`, data.playlists);
+        console.log(
+          `Fetching the ${category_id.toUpperCase()} category playlists...`,
+          data.playlists
+        );
         setPlaylists(data.playlists.items);
         data.playlists.items.map(async (eachPlaylist) => {
           fetch(
@@ -58,8 +62,12 @@ function Playlist(props) {
           )
             .then((res) => res.json())
             .then((data) => {
-              console.log(`Fetching the ${eachPlaylist.name.toUpperCase()} playlist tracks...`, data.items);
+              console.log(
+                `Fetching the ${eachPlaylist.name.toUpperCase()} playlist tracks...`,
+                data.items
+              );
               setAllTracks(...tracks, data.items);
+              setRandomPlaylist(data.items)
             })
             .catch((error) => {
               console.log(error);
@@ -68,33 +76,33 @@ function Playlist(props) {
       });
   }
 
-  //   async function getTracks(playlist_id) {
-  //     fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
-  //       headers: {
-  //         Accept: "application/json",
-  //         Authorization: `Bearer ${await token()}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log("tracks", data.items);
-  //         setTracks(data.items);
-  //       });
-  //   }
+  async function getTracks(playlist_id) {
+    fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${await token()}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(`Fetching playlist tracks...`, data.items);
+        setTracks(data.items);
+      });
+  }
 
   const showCategories = () => {
     return categories.map((eachCat) => {
-      return <li onClick={() => getPlaylists(eachCat.id)}>{eachCat.name}</li>;
+      return (
+        <button onClick={() => getPlaylists(eachCat.id)}>{eachCat.name}</button>
+      );
     });
   };
 
   //   const showPlaylist = () => {
   //     return playlists.map((eachPlaylist) => {
   //       return (
-  //         <li onClick={() => getTracks(eachPlaylist.id)}>
-  //           {eachPlaylist.name}
-  //         </li>
+  //         <li onClick={() => getTracks(eachPlaylist.id)}>{eachPlaylist.name}</li>
   //       );
   //     });
   //   };
@@ -104,7 +112,7 @@ function Playlist(props) {
   //       if (eachTrack.track.preview_url) {
   //         return (
   //           <li>
-  //             {eachTrack.track.preview_url}
+  //             {eachTrack.track.name}
   //             <audio controls>
   //               <source src={eachTrack.track.preview_url} type="audio/mpeg" />
   //             </audio>
@@ -113,45 +121,54 @@ function Playlist(props) {
   //       }
   //     });
   //   };
-  let playlist = []
-  function random(arrLength) {
 
-  }
+  let randomizedPlaylist = [];
+  let randomInt
+  let randomInt2
 
-  const makePlaylist = () => {
-    getPlaylists('chill');
-    tracks.map(each => {
-    playlist.push(each)
-        return (
-            <li>
-              {each.name}
-              <audio controls>
-                <source src={each.preview_url} type="audio/mpeg" />
-              </audio>
-            </li>
-          );
+  const showPlaylist = () => {
+    return randomPlaylist.map((eachPlaylist) => {
+    //   getTracks(eachPlaylist.id);
+    //   randomizedPlaylist.concat(eachPlaylist)
+    //   return tracks.map((eachTrack) => {
+        // randomizedPlaylist.push(eachTrack);
+        randomInt = getRandomInt(randomPlaylist.length);
+        for (let i = 0; i < 35; i++) {
+          if (randomPlaylist[randomInt]?.track.preview_url) {
+            return (
+              <div className='music-tile'>
+                <img src={randomPlaylist[randomInt]?.track.album.images[0].url} />
+                <h3>
+                  {randomPlaylist[randomInt]?.track.name}
+                </h3>
+                <audio controls>
+                  <source src={randomPlaylist[randomInt]?.track.preview_url} type="audio/mpeg" />
+                </audio>
+              </div>
+            );
+          }
+        };
     });
+  };
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
   }
 
   return (
     <div>
-      <div>
-        <h1>Genres</h1>
-        <button onClick={makePlaylist}>Chill</button>
-      </div>
-
-      {/* TRACKS
-      <ul>{showTracks()}</ul>
-      PLAYLIST
-      <ul>{showPlaylist()}</ul> */}
-      <h1>Categories</h1>
+      <h1>Choose a genre for your new playlist!</h1>
+      {/* <button onClick={getPlaylists("chill")}>Chill</button>
+      <button onClick={getPlaylists("romance")}>Romance</button> */}
+      {/* {makePlaylist()} */}
       <ul>{showCategories()}</ul>
+      <h2>PLAYLIST</h2>
+      <ul>{showPlaylist()}</ul>
+      {/* <h2>TRACKS</h2>
+      <ul>{showTracks()}</ul> */}
       <div className="buttons-row">
-        <Link to="/attractions">
-          <button>Previous: Attractions</button>
-        </Link>
-        <Link to="/myexperience">
-          <button>Finish Up: My Experience</button>
+        <Link to="/">
+          <button>Return: Home</button>
         </Link>
       </div>
     </div>

@@ -3,6 +3,8 @@
 body, html {
   padding: 0;
   margin: 0;
+  background: rgba(40, 40, 40, 1);
+  color: white;
 }
 
 #homepage {
@@ -11,7 +13,7 @@ body, html {
 }
 
 #navbar {
-  background: lightblue;
+  background: rgba(12, 12, 12, 1);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -24,7 +26,7 @@ body, html {
 }
 
 #nav-links a {
-  color: teal;
+  color: rgba(30, 215, 96, 0.8);
   font-size: 1.5vw;
   font-weight: bold;
   text-decoration: none;
@@ -32,59 +34,67 @@ body, html {
 }
 
 h1 {
-  margin: 0 2vw;
+  margin: 2vw auto;
+  text-align: center;
+}
+
+p {
+  font-size: 1.5vw;
+  margin: 2vw auto;
 }
 
 .home-header {
   width: 80vw;
-  padding: 2vw;
   margin: 1vw auto;
 }
 
 .home-row {
   width: 80vw;
-  padding: 2vw;
-  margin: 1vw auto;
+  margin: auto;
   display: flex;
+  justify-content: flex-start;
 }
 
-.img-vacation {
+.img-prototype {
   width: 30vw;
+  margin: 2vw auto;
 }
 
 #home-paragraph {
   width: 40vw;
-  margin: auto;
+  margin: 2vw auto;
 }
 
 button {
   color: black;
   font: inherit;
-  font-size: 2vw;
+  font-size: 1.5vw;
   font-weight: bold;
   font-style: italic;
-  background: linear-gradient(45deg, rgba(0,255,50,0.7), rgba(0,255,0,0) 80%), linear-gradient(225deg, rgba(0,50,255,0.7), rgba(0,0,255,0) 80%);
+  background: rgba(30, 215, 96, 0.8);
   border: none;
   border-radius: 2vw;
   padding: 1vw 2vw;
-  margin: 2vw 3vw;
-}
-
-/* button:focus {
-  outline: 0;
-} */
-
-#buttons-row-1 {
-  display: flex;
-  justify-content: flex-end;
+  margin: 1vw;
 }
 
 .buttons-row {
+  width: 80vw;
+  margin: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .multiple-choice div {
   display: flex;
 }
 
+.music-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.music-tile img {
+  width: 25vw;
+}
