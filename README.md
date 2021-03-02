@@ -1,1 +1,1 @@
-Deployed site @ api-mixify.netlify.app
+Deployed site @ [api-mixify.netlify.app](url)
