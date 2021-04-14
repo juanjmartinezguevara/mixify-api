@@ -9,8 +9,9 @@ function Playlist(props) {
   let [category, setCategory] = useState("");
   let [playlists, setPlaylists] = useState([]);
   let [tracks, setTracks] = useState([]);
-  let [allTracks, setAllTracks] = useState([]);
   let [randomPlaylist, setRandomPlaylist] = useState([]);
+  let allPlaylists = []
+  let newArray = []
 
   useEffect(() => {
     getCategories();
@@ -67,8 +68,11 @@ function Playlist(props) {
                 `Fetching the ${eachPlaylist.name.toUpperCase()} playlist tracks...`,
                 data.items
               );
-              setAllTracks(...tracks, data.items);
               setRandomPlaylist(data.items);
+              allPlaylists.push(data.items);
+              newArray = [].concat.apply([], allPlaylists);
+              setTracks(newArray)
+              console.log(tracks)
             })
             .catch((error) => {
               console.log(error);
